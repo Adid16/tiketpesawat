@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Tiket Pesawat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /*========== Base Styles ==========*/
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /*========== Header Styles ==========*/
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1ca1a8;
+            text-transform: uppercase;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            color: #1ca1a8;
+            cursor: pointer;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 30px;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.95);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: right 0.5s ease;
+            z-index: 999;
+        }
+
+        .navbar.active {
+            right: 0;
+        }
+
+        .navbar a {
+            font-size: 1.5rem;
+            color: #333;
+            text-decoration: none;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #1ca1a8;
+        }
+
+        /*========== Hero Section ==========*/
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1ca1a8;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        /*========== Booking Form ==========*/
+        .booking-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .trip-type {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .trip-type label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #1ca1a8;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #148b94;
+        }
+
+        /*========== Popular Destinations ==========*/
+        .section-title {
+            font-size: 1.5rem;
+            margin: 30px 0 20px;
+            color: #1ca1a8;
+            text-align: center;
+        }
+
+        .destinations-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .destinations {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #1ca1a8 #f0f0f0;
+            margin-bottom: 10px;
+            scroll-behavior: smooth;
+        }
+
+        .destinations::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .destinations::-webkit-scrollbar-thumb {
+            background-color: #1ca1a8;
+            border-radius: 3px;
+        }
+
+        .destinations::-webkit-scrollbar-track {
+            background-color: #f0f0f0;
+        }
+
+        .destination-card {
+            min-width: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .destination-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .destination-info {
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        .destination-location {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .destination-price {
+            display: flex;
+            align-items: center;
+            color: #1ca1a8;
+            font-weight: 500;
+        }
+
+        .price-icon {
+            margin-right: 5px;
+        }
+
+        .slider-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .slider-btn {
+            background-color: #1ca1a8;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .slider-btn:hover {
+            background-color: #148b94;
+        }
+
+        .slider-btn i {
+            font-size: 1rem;
+        }
+
+        /*========== Available Planes ==========*/
+        .planes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .plane-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .plane-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .plane-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .plane-info {
+            padding: 15px;
+        }
+
+        .plane-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1ca1a8;
+        }
+
+        .plane-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .select-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #1ca1a8;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .select-btn:hover {
+            background-color: #148b94;
+        }
+
+        /*========== Responsive Styles ==========*/
+        @media (max-width: 768px) {
+            .navbar {
+                gap: 20px;
+            }
+
+            .navbar a {
+                font-size: 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-col {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .trip-type {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .booking-form {
+                padding: 20px;
+            }
+
+            .destination-card {
+                min-width: 180px;
+            }
+
+            .plane-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">RIDHO AIRLANES</div>
+        <div class="menu-icon" id="menuIcon">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <nav class="navbar">
+            <a href="#">Beranda</a>
+            <a href="#">Penerbangan</a>
+            <a href="#">Promo</a>
+            <a href="#">Tentang Kami</a>
+            <a href="#">Kontak</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" data-aos="fade-up">
+            <h1>Jelajahi Dunia Dengan Penerbangan Kami!</h1>
+            <p>Temukan penerbangan terbaik dengan harga terjangkau ke berbagai destinasi menarik di seluruh dunia.</p>
+            <img src="Assets/plane.png" alt="Airplane" class="hero-image">
+        </section>
+
+        <!-- Booking Form -->
+        <section class="booking-form" data-aos="fade-up">
+            <h2>Cari Tiket Pesawat</h2>
+            <form id="bookingForm" action="tersedia.html">
+                <div class="trip-type">
+                    <label>
+                        <input type="radio" name="tripType" value="return" required checked> Pulang-Pergi
+                    </label>
+                    <label>
+                        <input type="radio" name="tripType" value="oneway" required> Sekali Jalan
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="takeOff">Dari</label>
+                        <select id="takeOff" required>
+                            <option value="" disabled selected>Pilih Kota Asal</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Bali">Bali</option>
+                            <option value="Surabaya">Surabaya</option>
+                            <option value="Medan">Medan</option>
+                            <option value="Yogyakarta">Yogyakarta</option>
+                        </select>
+                    </div>
+
+                    <div class="form-col">
+                        <label for="arrival">Ke</label>
+                        <select id="arrival" required>
+                            <option value="" disabled selected>Pilih Kota Tujuan</option>
+                            <option value="Tokyo">Tokyo</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Bangkok">Bangkok</option>
+                            <option value="Kuala Lumpur">Kuala Lumpur</option>
+                            <option value="Seoul">Seoul</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="departureDate">Tanggal Berangkat</label>
+                        <input type="date" id="departureDate" name="date" required>
+                    </div>
+
+                    <div class="form-col">
+                        <label for="returnDate">Tanggal Pulang</label>
+                        <input type="date" id="returnDate" name="date" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Cari Pesawat</button>
+            </form>
+        </section>
+
+        <!-- Popular Destinations -->
+        <section class="destinations-container" data-aos="fade-up">
+            <h2 class="section-title">Tujuan Populer</h2>
+            <div class="destinations" id="destinationsSlider">
+                <div class="destination-card">
+                    <img src="Assets/download.jpeg" alt="Bali" class="destination-img">
+                    <div class="destination-info">
+                        <div class="destination-location">Bali, Indonesia</div>
+                        <div class="destination-price">
+                            <i class="fa-solid fa-plane-departure price-icon"></i>
+                            Rp290.000
+                        </div>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <img src="Assets/jepang.jpeg" alt="Tokyo" class="destination-img">
+                    <div class="destination-info">
+                        <div class="destination-location">Tokyo, Jepang</div>
+                        <div class="destination-price">
+                            <i class="fa-solid fa-plane-departure price-icon"></i>
+                            Rp2.399.000
+                        </div>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <img src="Assets/paris.jpeg" alt="Paris" class="destination-img">
+                    <div class="destination-info">
+                        <div class="destination-location">Paris, Prancis</div>
+                        <div class="destination-price">
+                            <i class="fa-solid fa-plane-departure price-icon"></i>
+                            Rp3.199.000
+                        </div>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <img src="Assets/berlin.jpeg" alt="Berlin" class="destination-img">
+                    <div class="destination-info">
+                        <div class="destination-location">Berlin, Jerman</div>
+                        <div class="destination-price">
+                            <i class="fa-solid fa-plane-departure price-icon"></i>
+                            Rp2.459.000
+                        </div>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <img src="Assets/india.jpeg" alt="India" class="destination-img">
+                    <div class="destination-info">
+                        <div class="destination-location">Taj Mahal, India</div>
+                        <div class="destination-price">
+                            <i class="fa-solid fa-plane-departure price-icon"></i>
+                            Rp1.999.000
+                        </div>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <img src="Assets/newyork.jpeg" alt="New York" class="destination-img">
+                    <div class="destination-info">
+                        <div class="destination-location">New York, USA</div>
+                        <div class="destination-price">
+                            <i class="fa-solid fa-plane-departure price-icon"></i>
+                            Rp5.000.000
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-buttons">
+                <button class="slider-btn" id="prev">
+                    <i class="fa-solid fa-angle-left"></i>
+                </button>
+                <button class="slider-btn" id="next">
+                    <i class="fa-solid fa-angle-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Available Planes -->
+        <section data-aos="fade-up">
+            <h2 class="section-title">Pesawat Tersedia</h2>
+            <div class="planes-container">
+                <div class="plane-card">
+                    <img src="Assets/airasia.jpeg" alt="AirAsia" class="plane-img">
+                    <div class="plane-info">
+                        <h3 class="plane-name">Air Asia</h3>
+                        <p class="plane-desc">Pesawat komersial populer yang efisien untuk penerbangan jarak pendek hingga menengah.</p>
+                        <a href="#" class="select-btn">Pilih Pesawat</a>
+                    </div>
+                </div>
+
+                <div class="plane-card">
+                    <img src="Assets/garuda.jpeg" alt="Garuda Indonesia" class="plane-img">
+                    <div class="plane-info">
+                        <h3 class="plane-name">Garuda Indonesia</h3>
+                        <p class="plane-desc">Pesawat narrow-body dengan teknologi modern dan kenyamanan penumpang maksimal.</p>
+                        <a href="#" class="select-btn">Pilih Pesawat</a>
+                    </div>
+                </div>
+
+                <div class="plane-card">
+                    <img src="Assets/lion.jpeg" alt="Lion Air" class="plane-img">
+                    <div class="plane-info">
+                        <h3 class="plane-name">Lion Air</h3>
+                        <p class="plane-desc">Kenyamanan dasar yang memadai untuk penumpang di rute domestik dan regional.</p>
+                        <a href="#" class="select-btn">Pilih Pesawat</a>
+                    </div>
+                </div>
+
+                <div class="plane-card">
+                    <img src="Assets/transnusa.jpeg" alt="Trans Nusa" class="plane-img">
+                    <div class="plane-info">
+                        <h3 class="plane-name">Trans Nusa</h3>
+                        <p class="plane-desc">TransNusa menawarkan pengalaman penerbangan yang nyaman dengan fasilitas lengkap.</p>
+                        <a href="#" class="select-btn">Pilih Pesawat</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animation
+        AOS.init({
+            offset: 100,
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Mobile menu toggle
+        const menuIcon = document.getElementById('menuIcon');
+        const navbar = document.querySelector('.navbar');
+
+        menuIcon.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+        });
+
+        // Close navbar when clicking on a link
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+            });
+        });
+
+        // Destination slider functionality
+        const destinationsSlider = document.getElementById('destinationsSlider');
+        const nextBtn = document.getElementById('next');
+        const prevBtn = document.getElementById('prev');
+        const cardWidth = 215; // Width of each card + gap
+        let currentPosition = 0;
+        const maxPosition = (destinationsSlider.scrollWidth - destinationsSlider.clientWidth) / cardWidth;
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPosition < maxPosition) {
+                currentPosition++;
+                destinationsSlider.scrollTo({
+                    left: currentPosition * cardWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPosition > 0) {
+                currentPosition--;
+                destinationsSlider.scrollTo({
+                    left: currentPosition * cardWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Update button states based on scroll position
+        destinationsSlider.addEventListener('scroll', () => {
+            currentPosition = Math.round(destinationsSlider.scrollLeft / cardWidth);
+            
+            // Disable/enable buttons based on position
+            prevBtn.disabled = currentPosition === 0;
+            nextBtn.disabled = currentPosition >= maxPosition;
+        });
+
+        // Initialize button states
+        prevBtn.disabled = true;
+        nextBtn.disabled = destinationsSlider.scrollWidth <= destinationsSlider.clientWidth;
+    </script>
+</body>
+</html>
