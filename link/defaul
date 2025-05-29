@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Tiket Pesawat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+   
+           
+        /*========== Hero Section ==========*/
+        
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+      <nav class="navbar">
+      <a href="#" class="logo">RIDHO AIRLINES</a>
+      <a class="cart" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+          <path
+            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+          /></svg
+      ></a>
+
+      <div class="nav-links desktop-only">
+        <div class="search-box">
+          <input type="text" placeholder="Cari motor..." />
+          <button>Cari</button>
+        </div>
+        <a href="../index.html">Beranda</a>
+        <a href="../index.html">Penerbangan</a>
+        <a href="../index.html">Promo</a>
+        <a href="../index.html">Tentang Kami</a>
+        <a href="../index.html">Kontak</a>
+      </div>
+    </nav>
+
+    <div class="hamburger" id="hamburger-menu">
+      <p>Menu</p>
+    </div>
+
+    <div class="nav-links mobile-only">
+      <div class="search-box">
+        <input type="text" placeholder="Cari motor..." />
+        <button>Cari</button>
+      </div>
+      <a href="../index.html">Beranda</a>
+        <a href="../index.html">Penerbangan</a>
+        <a href="../index.html">Promo</a>
+        <a href="../index.html">Tentang Kami</a>
+        <a href="../index.html">Kontak</a>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+      <a href="javascript:void(0)" class="close-btn" id="close-sidebar">&times;</a>
+
+      <div class="search-box">
+        <input type="text" placeholder="Cari motor..." />
+        <button>Cari</button>
+      </div>
+      <a href="../index.html">Beranda</a>
+        <a href="../index.html">Penerbangan</a>
+        <a href="../index.html">Promo</a>
+        <a href="../index.html">Tentang Kami</a>
+        <a href="../index.html">Kontak</a>
+    </div>
+
+  
+        <!-- Hero Section -->
+
+           
+
+   
+    
+ 
+    <!-- JavaScript -->
+   <script src="script.js"></script>

@@ -40,13 +40,8 @@
             top: 0;
             z-index: 1000;
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1ca1a8;
-            text-transform: uppercase;
-        }
+/* logo */
+       
 
         .menu-icon {
             font-size: 1.5rem;
@@ -54,60 +49,523 @@
             cursor: pointer;
         }
 
-        .navbar {
-            display: flex;
-            gap: 30px;
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(255, 255, 255, 0.95);
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: right 0.5s ease;
-            z-index: 999;
-        }
+        /* .navbar { */
+        
+.navbar {
+  background-color: white;
+  color: black;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative; /* Penting untuk z-index */
+  z-index: 100; /* Pastikan navbar di atas konten lain */
+}
 
-        .navbar.active {
-            right: 0;
-        }
+.logo {
+  text-decoration: none;
 
-        .navbar a {
-            font-size: 1.5rem;
-            color: #333;
-            text-decoration: none;
-            padding: 10px;
-            transition: color 0.3s;
-        }
+    font-size: 24px;
+    font-weight: bold;
+    color: #1c69d4;
+    text-transform: uppercase;
 
-        .navbar a:hover {
-            color: #1ca1a8;
-        }
 
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+.cart {
+  display: none;
+}
+.mobile-only {
+  display: none; /* Sembunyikan secara default */
+  color: black;
+  text-decoration: none;
+  font-size: 1.2em;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+/* Desktop Navigation Links */
+.desktop-only {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.desktop-only a {
+  color: black;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.desktop-only a:hover {
+  background-color: #1c69d4;
+  color: white;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.search-box input[type="text"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  min-width: 200px;
+}
+
+.search-box button {
+  padding: 6px 10px;
+  border: none;
+  background-color: #1c69d4;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-box button:hover {
+  background-color: #1656ae;
+}
+
+/* Tombol Hamburger */
+.hamburger {
+  display: none; /* Sembunyikan secara default */
+  cursor: pointer;
+  background-color: blue;
+}
+
+.hamburger p {
+  display: none; /* Sembunyikan teks di hamburger */
+  color: black;
+  font-size: 14px;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: black;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  height: 100%;
+  width: 0; /* Awalnya tersembunyi */
+  position: fixed;
+  z-index: 1000; /* Pastikan di atas semua elemen */
+  top: 0;
+  left: 0;
+  background-color: white; /* Warna gelap untuk sidebar */
+  overflow-x: hidden;
+  transition: 0.5s; /* Transisi halus saat buka/tutup */
+  padding-top: 60px; /* Ruang untuk tombol tutup */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 1.5em;
+  color: #f1f1f1;
+  display: block;
+  transition: 0.3s;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box; /* Pastikan padding tidak membuat lebar melebihi 100% */
+}
+
+.sidebar a:hover {
+  color: #818181;
+  background-color: #555;
+}
+
+.sidebar .search-box {
+  margin: 20px 0;
+  width: 80%; /* Sesuaikan lebar search box di sidebar */
+}
+
+.sidebar .search-box input[type="text"] {
+  min-width: unset;
+  width: 100%; /* Isi penuh lebar search box di sidebar */
+}
+
+.sidebar .close-btn {
+  position: absolute;
+  top: 15px; /* Sesuaikan posisi tombol tutup */
+  right: 25px;
+  font-size: 36px;
+  color: #f1f1f1;
+  cursor: pointer;
+  text-decoration: none; /* Hapus underline default dari link */
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .cart {
+    display: flex;
+  }
+  .desktop-only {
+    display: none; /* Sembunyikan navigasi desktop di mobile */
+  }
+
+  .hamburger {
+    display: flex; /* Tampilkan hamburger di mobile */
+    justify-content: center; /* Menengahkan konten secara vertikal */
+    align-items: center; /* Menengahkan konten secara horizontal */
+    padding: 8px;
+  }
+  .logo{
+    font-size: 20px;
+  }
+  .hamburger p {
+    display: flex;
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+  }
+
+  .navbar {
+    justify-content: space-between; /* Menjaga logo dan hamburger terpisah */
+  }
+}
+
+/* slider */
+.slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 3;
+  padding: 20px;
+}
+
+.overlay-text h1 {
+  font-size: 1.5em;
+  margin: 0 0 10px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.overlay-text p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+}
+
+.cta-btn {
+  background-color: #0070ba; /* biru khas BMW */
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: #005f9e;
+}
+
+/* Responsive untuk mobile */
+@media (max-width: 768px) {
+  .overlay-text h1 {
+    font-size: 20px;
+  }
+
+  .overlay-text p {
+    font-size: 1em;
+  }
+
+  .cta-btn {
+    font-size: 0.9em;
+    padding: 10px 20px;
+  }
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2em;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.prev {
+  display: none;
+}
+
+.next {
+  right: 10px;
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+  .slide {
+    height: 250px;
+  }
+}
+
+/* Animasi slider jika otomatis */
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  33% {
+    transform: translateX(-100%);
+  }
+  66% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+
+/* navbar */
+
+
+.navbar {
+  background-color: white;
+  color: black;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative; /* Penting untuk z-index */
+  z-index: 100; /* Pastikan navbar di atas konten lain */
+}
+
+.logo {
+  text-decoration: none;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+.cart {
+  display: none;
+}
+.mobile-only {
+  display: none; /* Sembunyikan secara default */
+  color: black;
+  text-decoration: none;
+  font-size: 1.2em;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+/* Desktop Navigation Links */
+.desktop-only {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.desktop-only a {
+  color: black;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.desktop-only a:hover {
+  background-color: #1c69d4;
+  color: white;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.search-box input[type="text"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  min-width: 200px;
+}
+
+.search-box button {
+  padding: 6px 10px;
+  border: none;
+  background-color: #1c69d4;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-box button:hover {
+  background-color: #1656ae;
+}
+
+/* Tombol Hamburger */
+.hamburger {
+  display: none; /* Sembunyikan secara default */
+  cursor: pointer;
+  background-color: blue;
+}
+
+.hamburger p {
+  display: none; /* Sembunyikan teks di hamburger */
+  color: black;
+  font-size: 14px;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: black;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  height: 100%;
+  width: 0; /* Awalnya tersembunyi */
+  position: fixed;
+  z-index: 1000; /* Pastikan di atas semua elemen */
+  top: 0;
+  left: 0;
+  background-color: white; /* Warna gelap untuk sidebar */
+  overflow-x: hidden;
+  transition: 0.5s; /* Transisi halus saat buka/tutup */
+  padding-top: 60px; /* Ruang untuk tombol tutup */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 1.5em;
+  color: #000000;
+  display: block;
+  transition: 0.3s;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box; /* Pastikan padding tidak membuat lebar melebihi 100% */
+}
+
+.sidebar a:hover {
+    height: auto;
+  color: white;
+  background-color: rgb(79, 79, 79);
+}
+
+.sidebar .search-box {
+  margin: 20px 0;
+  width: 80%; /* Sesuaikan lebar search box di sidebar */
+}
+
+.sidebar .search-box input[type="text"] {
+  min-width: unset;
+  width: 100%; /* Isi penuh lebar search box di sidebar */
+}
+
+.sidebar .close-btn {
+  position: absolute;
+  top: 15px; /* Sesuaikan posisi tombol tutup */
+  right: 25px;
+  font-size: 36px;
+  color: black;
+  cursor: pointer;
+  text-decoration: none; /* Hapus underline default dari link */
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .cart {
+    display: flex;
+  }
+  .desktop-only {
+    display: none; /* Sembunyikan navigasi desktop di mobile */
+  }
+
+  .hamburger {
+    display: flex; /* Tampilkan hamburger di mobile */
+    justify-content: center; /* Menengahkan konten secara vertikal */
+    align-items: center; /* Menengahkan konten secara horizontal */
+    padding: 8px;
+  }
+  .hamburger p {
+    display: flex;
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+  }
+
+  .navbar {
+    justify-content: space-between; /* Menjaga logo dan hamburger terpisah */
+  }
+}
+           
         /*========== Hero Section ==========*/
-        .hero {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+        
 
-        .hero h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #1ca1a8;
-        }
-
-        .hero-image {
-            width: 100%;
-            max-width: 500px;
-            margin: 20px auto;
-            display: block;
-        }
 
         /*========== Booking Form ==========*/
         .booking-form {
@@ -128,6 +586,7 @@
             gap: 15px;
             margin-bottom: 15px;
         }
+
 
         .form-col {
             flex: 1;
@@ -338,17 +797,10 @@
 
         /*========== Responsive Styles ==========*/
         @media (max-width: 768px) {
-            .navbar {
-                gap: 20px;
-            }
+            /* .navbar { */
+           
 
-            .navbar a {
-                font-size: 1.2rem;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
+           
 
             .form-row {
                 flex-direction: column;
@@ -382,32 +834,209 @@
                 min-width: 100%;
             }
         }
+
+        
+/* comments */
+
+.comment-section {
+  padding: 40px 20px;
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+.comments-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 20px;
+  max-height: none;
+  overflow-y: visible;
+}
+.comment {
+  background: #f7f9fc;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+.comment p {
+  margin: 0 0 10px 0;
+}
+.comment .author {
+  font-weight: bold;
+  color: #003366;
+}
+@media (max-width: 768px) {
+  .comments-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 360px; /* tinggi scroll area */
+    overflow-y: auto;
+    gap: 15px;
+  }
+}
+
+/* footer */
+
+.site-footer {
+  background-color: #003366; /* warna biru BMW */
+  color: #fff;
+  padding: 40px 20px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 30px;
+}
+
+.footer-logo h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.footer-logo p {
+  margin: 0;
+  font-size: 16px;
+  color: #cbd5e1;
+}
+
+.footer-links,
+.footer-social {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-links a,
+.footer-social a {
+  color: #cbd5e1;
+  text-decoration: none;
+  margin-bottom: 8px;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover,
+.footer-social a:hover {
+  color: #f0a500; /* warna aksen saat hover */
+}
+
+.footer-social p {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #f0a500;
+}
+
+.footer-bottom {
+  border-top: 1px solid #1e2a47;
+  margin-top: 30px;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #8a9bb8;
+}
+
+/* Responsive untuk layar kecil */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  .footer-links,
+  .footer-social {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .footer-links a,
+  .footer-social a {
+    margin-bottom: 0;
+  }
+}
+
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div class="logo">RIDHO AIRLANES</div>
-        <div class="menu-icon" id="menuIcon">
-            <i class="fa-solid fa-bars"></i>
+      <nav class="navbar">
+      <a href="#" class="logo">RIDHO AIRLINES</a>
+      <a class="cart" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+          <path
+            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+          /></svg
+      ></a>
+
+      <div class="nav-links desktop-only">
+        <div class="search-box">
+          <input type="text" placeholder="Cari pesawat..." />
+          <button>Cari</button>
         </div>
-        <nav class="navbar">
-            <a href="#">Beranda</a>
-            <a href="#">Penerbangan</a>
-            <a href="#">Promo</a>
-            <a href="#">Tentang Kami</a>
-            <a href="#">Kontak</a>
-        </nav>
-    </header>
+        <a href="index.html">Beranda</a>
+        <a href="index.html">Penerbangan</a>
+        <a href="index.html">Promo</a>
+        <a href="index.html">Tentang Kami</a>
+        <a href="index.html">Kontak</a>
+      </div>
+    </nav>
 
-    <div class="container">
+    <div class="hamburger" id="hamburger-menu">
+      <p>Menu</p>
+    </div>
+
+    <div class="nav-links mobile-only">
+      <div class="search-box">
+        <input type="text" placeholder="Cari pesawat..." />
+        <button>Cari</button>
+      </div>
+      <a href="index.html">Beranda</a>
+        <a href="index.html">Penerbangan</a>
+        <a href="index.html">Promo</a>
+        <a href="index.html">Tentang Kami</a>
+        <a href="index.html">Kontak</a>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+      <a href="javascript:void(0)" class="close-btn" id="close-sidebar">&times;</a>
+
+      <div class="search-box">
+        <input type="text" placeholder="Cari pesawat..." />
+        <button>Cari</button>
+      </div>
+      <a href="index.html">Beranda</a>
+        <a href="index.html">Penerbangan</a>
+        <a href="index.html">Promo</a>
+        <a href="index.html">Tentang Kami</a>
+        <a href="index.html">Kontak</a>
+    </div>
+
+  
         <!-- Hero Section -->
-        <section class="hero" data-aos="fade-up">
-            <h1>Jelajahi Dunia Dengan Penerbangan Kami!</h1>
-            <p>Temukan penerbangan terbaik dengan harga terjangkau ke berbagai destinasi menarik di seluruh dunia.</p>
-            <img src="Assets/plane.png" alt="Airplane" class="hero-image">
-        </section>
+      <!-- slider -->
 
+    <div class="slider-container">
+      <div class="overlay-text">
+        <h1>Performa Maksimal, Kendali di Tangan Anda</h1>
+        <a href="index.html"><button class="cta-btn">Lihat Koleksi</button></a>
+      </div>
+      <div class="slider" id="slider">
+        <div class="slide" style="background-image: url('Assets/slider-1.png')"></div>
+        <div class="slide" style="background-image: url('Assets/slider-2.png')"></div>
+        <div class="slide" style="background-image: url('Assets/slider-3.png')"></div>
+      </div>
+      <button class="nav-btn prev" onclick="prevSlide()">❮</button>
+      <button class="nav-btn next" onclick="nextSlide()">❯</button>
+    </div>
+
+  <div class="container">
         <!-- Booking Form -->
         <section class="booking-form" data-aos="fade-up">
             <h2>Cari Tiket Pesawat</h2>
@@ -553,7 +1182,7 @@
                     <div class="plane-info">
                         <h3 class="plane-name">Air Asia</h3>
                         <p class="plane-desc">Pesawat komersial populer yang efisien untuk penerbangan jarak pendek hingga menengah.</p>
-                        <a href="#" class="select-btn">Pilih Pesawat</a>
+                        <a href="link/airasia.html" class="select-btn">Pilih Pesawat</a>
                     </div>
                 </div>
 
@@ -562,7 +1191,7 @@
                     <div class="plane-info">
                         <h3 class="plane-name">Garuda Indonesia</h3>
                         <p class="plane-desc">Pesawat narrow-body dengan teknologi modern dan kenyamanan penumpang maksimal.</p>
-                        <a href="#" class="select-btn">Pilih Pesawat</a>
+                        <a href="link/garuda.html" class="select-btn">Pilih Pesawat</a>
                     </div>
                 </div>
 
@@ -571,7 +1200,7 @@
                     <div class="plane-info">
                         <h3 class="plane-name">Lion Air</h3>
                         <p class="plane-desc">Kenyamanan dasar yang memadai untuk penumpang di rute domestik dan regional.</p>
-                        <a href="#" class="select-btn">Pilih Pesawat</a>
+                        <a href="link/lion.html" class="select-btn">Pilih Pesawat</a>
                     </div>
                 </div>
 
@@ -580,12 +1209,68 @@
                     <div class="plane-info">
                         <h3 class="plane-name">Trans Nusa</h3>
                         <p class="plane-desc">TransNusa menawarkan pengalaman penerbangan yang nyaman dengan fasilitas lengkap.</p>
-                        <a href="#" class="select-btn">Pilih Pesawat</a>
+                        <a href="link/nusa.html" class="select-btn">Pilih Pesawat</a>
                     </div>
                 </div>
             </div>
         </section>
+            <!-- Bagian Komentar -->
+    <section class="comment-section">
+      <h2>Komentar</h2>
+      <form class="comment-form">
+        <div class="comments-container">
+         <div class="comments-section">
+    <div class="comment">
+        <div class="author">– Angkasa Putra</div>
+        <p>"Pengalaman terbang dengan maskapai ini sangat nyaman dan tepat waktu! Pelayanan kru kabin juga sangat profesional dan ramah."</p>
     </div>
+    <div class="comment">
+        <div class="author">– Dirgantara Sari</div>
+        <p>"Pesawatnya modern dengan fasilitas hiburan yang lengkap, membuat perjalanan jauh tidak terasa membosankan."</p>
+    </div>
+    <div class="comment">
+        <div class="author">– Awan Kurnia</div>
+        <p>"Proses check-in mudah dan pilihan rute yang fleksibel sangat membantu saya dalam mengatur jadwal perjalanan."</p>
+    </div>
+    <div class="comment">
+        <div class="author">– Langit Handayani</div>
+        <p>"Pesawat ini sangat efisien dalam penggunaan bahan bakar, menunjukkan komitmen terhadap lingkungan."</p>
+    </div>
+    <div class="comment">
+        <div class="author">– Bayu Prasetyo</div>
+        <p>"Pelayanan pelanggan memuaskan, respons cepat terhadap pertanyaan, dan penanganan bagasi yang aman."</p>
+    </div>
+    <div class="comment">
+        <div class="author">– Bintang Nurhaliza</div>
+        <p>"Keamanan dan kenyamanan penerbangan selalu menjadi prioritas utama saya dalam memilih maskapai."</p>
+    </div>
+</div>
+</section>
+</form>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <h3>Penerbangan Jaya</h3>
+            <p>Solusi perjalanan udara yang aman dan nyaman.</p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Beranda</a>
+            <a href="#">Destinasi</a>
+            <a href="#">Tentang Kami</a>
+            <a href="#">Kontak</a>
+        </div>
+        <div class="footer-social">
+            <p>Ikuti Kami</p>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">YouTube</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 RIDHO AIRLINES. All rights reserved.</p>
+    </div>
+</footer>
 
     <!-- JavaScript -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -599,19 +1284,44 @@
         });
 
         // Mobile menu toggle
-        const menuIcon = document.getElementById('menuIcon');
-        const navbar = document.querySelector('.navbar');
+    //    navbar
 
-        menuIcon.addEventListener('click', () => {
-            navbar.classList.toggle('active');
-        });
+    document.addEventListener("DOMContentLoaded", () => {
+    const hamburgerMenu = document.getElementById("hamburger-menu");
+    const sidebar = document.getElementById("sidebar");
+    const closeSidebarBtn = document.getElementById("close-sidebar");
 
-        // Close navbar when clicking on a link
-        document.querySelectorAll('.navbar a').forEach(link => {
-            link.addEventListener('click', () => {
-                navbar.classList.remove('active');
-            });
-        });
+    // Ketika hamburger diklik, buka sidebar
+    hamburgerMenu.addEventListener("click", () => {
+      sidebar.style.width = "100%"; // Lebar sidebar saat terbuka
+    });
+
+    // Ketika tombol close diklik, tutup sidebar
+    closeSidebarBtn.addEventListener("click", () => {
+      sidebar.style.width = "0"; // Tutup sidebar
+    });
+  });
+  const slider = document.getElementById("slider");
+  const slides = document.querySelectorAll(".slide");
+  let index = 0;
+
+  function showSlide(i) {
+    index = (i + slides.length) % slides.length;
+    slider.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function nextSlide() {
+    showSlide(index + 1);
+  }
+
+  function prevSlide() {
+    showSlide(index - 1);
+  }
+
+  setInterval(() => {
+    nextSlide();
+  }, 4000);
+
 
         // Destination slider functionality
         const destinationsSlider = document.getElementById('destinationsSlider');
